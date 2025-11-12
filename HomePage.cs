@@ -15,6 +15,7 @@ namespace CoffeeHouseABC
 
         // 🔹 Cho phép null để tránh CS8618
         private UC_Menu? _ucMenu;
+        public UC_Menu? MenuControl => _ucMenu;
 
 
         private List<ChiTietDonHang> _gioHang = new();

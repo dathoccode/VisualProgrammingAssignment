@@ -1,13 +1,13 @@
 ﻿using CoffeeHouseABC.Models;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace CoffeeHouseABC.User_Control
 {
     public partial class UC_ItemSanPham : UserControl
     {
-        public SanPham SanPham { get; private set; }
-
+        public SanPham SanPham { get; private set; } = new SanPham();
         public int SoLuong => (int)guna2NumericUpDown1.Value;
 
         public UC_ItemSanPham()
@@ -18,7 +18,6 @@ namespace CoffeeHouseABC.User_Control
         public void SetData(SanPham sp)
         {
             SanPham = sp;
-
             guna2HtmlLabel2.Text = sp.TenSP;
             guna2HtmlLabel3.Text = sp.Gia.ToString("N0") + " VNĐ";
 
@@ -33,6 +32,17 @@ namespace CoffeeHouseABC.User_Control
             }
 
             guna2NumericUpDown1.Value = 0;
+        }
+
+        public void CapNhatSoLuong()
+        {
+            guna2NumericUpDown1.Value = SoLuong;
+        }
+
+        public void SetSoLuong(int value)
+        {
+            if (value < 0) value = 0;
+            guna2NumericUpDown1.Value = value;
         }
     }
 }

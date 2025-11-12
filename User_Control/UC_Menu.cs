@@ -5,6 +5,7 @@ using CoffeeHouseABC.Models;
 
 namespace CoffeeHouseABC.User_Control
 {
+
     public partial class UC_Menu : UserControl
     {
         public UC_Menu()
@@ -72,5 +73,18 @@ namespace CoffeeHouseABC.User_Control
                 home.ChuyenSangDonHang();
             }
         }
+        public void ResetSoLuongSanPham(int maSP)
+        {
+            foreach (UC_ItemSanPham item in flowPanel.Controls.OfType<UC_ItemSanPham>())
+            {
+                if (item.SanPham.MaSP == maSP)
+                {
+                    item.SetSoLuong(0);     // gọi hàm trong UC_ItemSanPham
+                    break;
+                }
+            }
+        }
+
+
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using CoffeeHouseABC.Database;
@@ -12,24 +14,20 @@ namespace CoffeeHouseABC.User_Control
         private List<ChiTietDonHang> _ds = new();
         private List<string> _tenSP = new();
 
-        // Constructor rỗng (dùng khi mở Đơn hàng mà chưa chọn gì)
         public UC_Order()
         {
             InitializeComponent();
             HienThiTrangThaiTrong();
         }
 
-        //  Constructor có dữ liệu
         public UC_Order(List<ChiTietDonHang> ds, List<string> tenSP)
         {
             InitializeComponent();
             _ds = ds;
             _tenSP = tenSP;
-
             LoadOrder();
         }
 
-        //  Khi chưa có đơn hàng
         private void HienThiTrangThaiTrong()
         {
             panelList.Controls.Clear();
@@ -44,11 +42,9 @@ namespace CoffeeHouseABC.User_Control
             };
 
             panelList.Controls.Add(lbl);
-
             lblTongTien.Text = "Tổng: 0 VNĐ";
         }
 
-        // load danh sách đơn hàng
         private void LoadOrder()
         {
             panelList.Controls.Clear();
@@ -66,9 +62,35 @@ namespace CoffeeHouseABC.User_Control
                 panelList.Controls.Add(item);
             }
 
+            CapNhatTongTien();
+        }
+
+        // ✅ Hàm cập nhật tổng tiền (dùng lại nhiều nơi)
+        public void CapNhatTongTien()
+        {
+            if (_ds == null || _ds.Count == 0)
+            {
+                lblTongTien.Text = "Tổng: 0 VNĐ";
+                return;
+            }
+
             decimal tong = _ds.Sum(x => x.DonGiaBan * x.SoLuong);
             lblTongTien.Text = $"Tổng: {tong:N0} VNĐ";
         }
+
+        // ✅ Gọi từ UC_ItemOrder khi bấm Xóa hoặc số lượng = 0
+        public void XoaSanPhamKhoiDonHang(int maSP)
+        {
+            _ds.RemoveAll(x => x.MaSP == maSP);
+            _tenSP = _tenSP.Take(_ds.Count).ToList();
+            LoadOrder();
+
+            if (_ds.Count == 0)
+                HienThiTrangThaiTrong();
+        }
+
+        // ✅ Số lượng sản phẩm còn trong giỏ
+        public int SoLuongDonHang => _ds?.Count ?? 0;
 
         private void BtnThanhToan_Click(object sender, EventArgs e)
         {
@@ -78,7 +100,6 @@ namespace CoffeeHouseABC.User_Control
                 return;
             }
 
-            // Kiểm tra xem người dùng đã đăng nhập chưa
             if (SessionManager.CurrentUser == null)
             {
                 MessageBox.Show("Vui lòng đăng nhập trước khi đặt hàng.");
@@ -89,20 +110,16 @@ namespace CoffeeHouseABC.User_Control
             {
                 DatabaseService db = new DatabaseService();
                 int maKH = SessionManager.CurrentUser.MaKH;
-
                 decimal tongTien = _ds.Sum(x => x.DonGiaBan * x.SoLuong);
-
                 int maHD = db.TaoDonHang(maKH, tongTien, "Đã Thanh Toán", _ds);
 
                 MessageBox.Show($"Đặt hàng thành công! Mã đơn hàng: {maHD}");
 
-                // Thay vì tạo UC_PurchaseHistory mới, tìm control có sẵn và reload dữ liệu
                 var parent = this.Parent;
                 if (parent != null)
                 {
                     UC_PurchaseHistory historyUC = null;
-                    
-                    // Tìm UC_PurchaseHistory trong danh sách control cha
+
                     foreach (Control ctrl in parent.Controls)
                     {
                         if (ctrl is UC_PurchaseHistory uc)
@@ -114,15 +131,12 @@ namespace CoffeeHouseABC.User_Control
 
                     if (historyUC == null)
                     {
-                        // Nếu chưa có thì tạo mới (lần đầu tiên)
                         historyUC = new UC_PurchaseHistory();
                         historyUC.Dock = DockStyle.Fill;
                     }
 
-                    // Gọi load lại dữ liệu
                     historyUC.LoadPurchaseHistory();
 
-                    // Hiển thị UC_PurchaseHistory
                     parent.Controls.Clear();
                     parent.Controls.Add(historyUC);
                 }
@@ -136,7 +150,5 @@ namespace CoffeeHouseABC.User_Control
                 MessageBox.Show("Lỗi khi lưu đơn hàng: " + ex.Message);
             }
         }
-
-        
     }
 }
