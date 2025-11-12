@@ -116,7 +116,7 @@
             Controls.Add(guna2HtmlLabel2);
             Controls.Add(guna2PictureBox1);
             ForeColor = Color.Black;
-            Margin = new Padding(0);
+            Margin = new Padding(20);
             Name = "UC_ItemSanPham";
             Size = new Size(300, 361);
             ((System.ComponentModel.ISupportInitialize)guna2PictureBox1).EndInit();

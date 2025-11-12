@@ -124,6 +124,7 @@
             guna2Button1.Size = new Size(300, 57);
             guna2Button1.TabIndex = 8;
             guna2Button1.Text = "Xóa";
+            
             // 
             // UC_ItemOrder
             // 
@@ -135,6 +136,7 @@
             Controls.Add(guna2HtmlLabel3);
             Controls.Add(guna2PictureBox1);
             Controls.Add(guna2HtmlLabel2);
+            Margin = new Padding(20);
             Name = "UC_ItemOrder";
             Size = new Size(300, 361);
             ((System.ComponentModel.ISupportInitialize)guna2PictureBox1).EndInit();

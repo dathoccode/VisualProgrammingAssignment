@@ -96,7 +96,7 @@ namespace CoffeeHouseABC.User_Control
 
                 MessageBox.Show($"Đặt hàng thành công! Mã đơn hàng: {maHD}");
 
-                // ✅ Thay vì tạo UC_PurchaseHistory mới, tìm control có sẵn và reload dữ liệu
+                // Thay vì tạo UC_PurchaseHistory mới, tìm control có sẵn và reload dữ liệu
                 var parent = this.Parent;
                 if (parent != null)
                 {

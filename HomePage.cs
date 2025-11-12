@@ -15,7 +15,7 @@ namespace CoffeeHouseABC
 
         // 🔹 Cho phép null để tránh CS8618
         private UC_Menu? _ucMenu;
-        private UC_PurchaseHistory? _ucHistory;
+
 
         private List<ChiTietDonHang> _gioHang = new();
         private List<string> _tenSP = new();
@@ -23,7 +23,7 @@ namespace CoffeeHouseABC
         public HomePage()
         {
             InitializeComponent();
-           
+
         }
 
         // 🔹 Khi cần chuyển sang tab "Đơn hàng"
@@ -131,7 +131,7 @@ namespace CoffeeHouseABC
             }
             else
             {
-                guna2Panel3.Width = 250;
+                guna2Panel3.Width = 322;
                 ExpandAllButtons();
                 isCollapsed = false;
             }
@@ -199,5 +199,14 @@ namespace CoffeeHouseABC
             Application.Exit();  // Đảm bảo thoát hoàn toàn chương trình
         }
 
+        private void guna2HtmlLabel2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panelContainer_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

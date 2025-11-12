@@ -26,10 +26,12 @@
             // flowPanel
             // 
             flowPanel.AutoScroll = true;
-            flowPanel.Dock = DockStyle.Top;
+            flowPanel.Dock = DockStyle.Fill;
             flowPanel.Location = new Point(0, 0);
+            flowPanel.Margin = new Padding(0);
             flowPanel.Name = "flowPanel";
-            flowPanel.Size = new Size(1580, 692);
+            flowPanel.Padding = new Padding(80, 15, 80, 15);
+            flowPanel.Size = new Size(1580, 754);
             flowPanel.TabIndex = 0;
             // 
             // btnDatHang

@@ -5,7 +5,7 @@ namespace CoffeeHouseABC.Database
 {
     public class DatabaseConnection
     {
-        private static readonly string connectionString = "Data Source=Datphung;Initial Catalog=CoffeeHouseABC;Integrated Security=True;Trust Server Certificate=True";
+        private static readonly string connectionString = "Data Source=DUCK;Initial Catalog=CoffeeHouseABC;Integrated Security=True;Trust Server Certificate=True";
 
         public static SqlConnection GetConnection()
         {

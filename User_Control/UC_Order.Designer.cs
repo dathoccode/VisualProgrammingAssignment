@@ -27,10 +27,12 @@
             // 
             panelList.AutoScroll = true;
             panelList.BackColor = Color.White;
-            panelList.Dock = DockStyle.Top;
+            panelList.Dock = DockStyle.Fill;
             panelList.Location = new Point(0, 0);
+            panelList.Margin = new Padding(0);
             panelList.Name = "panelList";
-            panelList.Size = new Size(1580, 628);
+            panelList.Padding = new Padding(65, 15, 65, 15);
+            panelList.Size = new Size(1580, 631);
             panelList.TabIndex = 0;
             // 
             // lblTongTien
