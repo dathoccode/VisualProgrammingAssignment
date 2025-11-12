@@ -15,7 +15,7 @@ namespace CoffeeHouseABC
 
         // 🔹 Cho phép null để tránh CS8618
         private UC_Menu? _ucMenu;
-        
+
 
         private List<ChiTietDonHang> _gioHang = new();
         private List<string> _tenSP = new();
@@ -200,6 +200,11 @@ namespace CoffeeHouseABC
         }
 
         private void guna2HtmlLabel2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panelContainer_Paint(object sender, PaintEventArgs e)
         {
 
         }

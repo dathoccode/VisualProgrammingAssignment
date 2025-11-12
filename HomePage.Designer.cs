@@ -66,13 +66,17 @@ namespace CoffeeHouseABC
             btnDangXuat = new Guna2Button();
             btnDanhMuc = new Guna2Button();
             panelContainer = new Guna2Panel();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            tableLayoutPanel2 = new TableLayoutPanel();
             guna2Panel2.SuspendLayout();
             guna2Panel3.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
+            panelContainer.SuspendLayout();
             SuspendLayout();
             // 
             // guna2Panel2
             // 
+            guna2Panel2.Controls.Add(tableLayoutPanel1);
             guna2Panel2.Controls.Add(guna2HtmlLabel2);
             guna2Panel2.Controls.Add(guna2HtmlLabel1);
             guna2Panel2.CustomizableEdges = customizableEdges1;
@@ -187,7 +191,7 @@ namespace CoffeeHouseABC
             btnDonHang.Animated = true;
             btnDonHang.BorderRadius = 30;
             btnDonHang.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
-            btnDonHang.CustomImages.Image = Properties.Resources.send;
+            btnDonHang.CustomImages.Image = Properties.Resources.icon_cart;
             btnDonHang.CustomImages.ImageAlign = HorizontalAlignment.Left;
             btnDonHang.CustomImages.ImageSize = new Size(30, 30);
             btnDonHang.CustomizableEdges = customizableEdges5;
@@ -359,6 +363,7 @@ namespace CoffeeHouseABC
             // 
             // panelContainer
             // 
+            panelContainer.Controls.Add(tableLayoutPanel2);
             panelContainer.CustomizableEdges = customizableEdges19;
             panelContainer.Dock = DockStyle.Fill;
             panelContainer.FillColor = Color.White;
@@ -367,6 +372,38 @@ namespace CoffeeHouseABC
             panelContainer.ShadowDecoration.CustomizableEdges = customizableEdges20;
             panelContainer.Size = new Size(1498, 926);
             panelContainer.TabIndex = 3;
+            panelContainer.Paint += panelContainer_Paint;
+            // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.ColumnCount = 2;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.Location = new Point(405, 107);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 2;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.Size = new Size(1015, 491);
+            tableLayoutPanel1.TabIndex = 0;
+            // 
+            // tableLayoutPanel2
+            // 
+            tableLayoutPanel2.ColumnCount = 5;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel2.Dock = DockStyle.Fill;
+            tableLayoutPanel2.Location = new Point(0, 0);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 2;
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.Size = new Size(1498, 926);
+            tableLayoutPanel2.TabIndex = 0;
             // 
             // HomePage
             // 
@@ -385,6 +422,7 @@ namespace CoffeeHouseABC
             guna2Panel2.ResumeLayout(false);
             guna2Panel3.ResumeLayout(false);
             flowLayoutPanel1.ResumeLayout(false);
+            panelContainer.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -404,6 +442,8 @@ namespace CoffeeHouseABC
         private Guna2Panel panelContainer;
         private Guna2HtmlLabel guna2HtmlLabel2;
         private FlowLayoutPanel flowLayoutPanel1;
+        private TableLayoutPanel tableLayoutPanel1;
+        private TableLayoutPanel tableLayoutPanel2;
     }
 
 }
