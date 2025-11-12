@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 using CoffeeHouseABC.Database;
-using CoffeeHouseABC.Models;
 using CoffeeHouseABC.Utils;
 using Microsoft.Data.SqlClient;
 
@@ -9,7 +8,7 @@ namespace CoffeeHouseABC.User_Control
 {
     public partial class UC_PurchaseHistory : UserControl
     {
-        private bool _isLoaded = false; // tránh load lại nhiều lần
+        private bool _isLoaded = false;
 
         public UC_PurchaseHistory()
         {
@@ -18,7 +17,6 @@ namespace CoffeeHouseABC.User_Control
 
         private void UC_PurchaseHistory_Load(object sender, EventArgs e)
         {
-            // chỉ load một lần đầu tiên khi UC được tạo
             if (!_isLoaded)
             {
                 LoadPurchaseHistory();
@@ -26,13 +24,8 @@ namespace CoffeeHouseABC.User_Control
             }
         }
 
-        /// <summary>
-        /// Tải toàn bộ lịch sử đơn hàng của khách hàng hiện tại.
-        /// Có thể gọi lại hàm này sau khi người dùng thanh toán thành công.
-        /// </summary>
         public void LoadPurchaseHistory()
         {
-            // Kiểm tra đăng nhập
             if (SessionManager.CurrentUser == null)
             {
                 MessageBox.Show("Vui lòng đăng nhập trước khi xem lịch sử mua hàng.");
@@ -50,7 +43,7 @@ namespace CoffeeHouseABC.User_Control
                     string sql = @"
                         SELECT MaHD, NgayLap, TongTien, TrangThai 
                         FROM DONHANG
-                        WHERE MaKH = 2
+                        WHERE MaKH = @maKH
                         ORDER BY NgayLap DESC";
 
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
@@ -60,7 +53,7 @@ namespace CoffeeHouseABC.User_Control
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             flowLayoutPanel1.SuspendLayout();
-                            flowLayoutPanel1.Controls.Clear(); // chỉ xóa nội dung, không xóa control chính
+                            flowLayoutPanel1.Controls.Clear();
 
                             bool hasData = false;
 
@@ -74,6 +67,7 @@ namespace CoffeeHouseABC.User_Control
 
                                 var item = new UC_ItemPurchase();
                                 item.SetData(maHD, ngay, tong, tt);
+                                item.DeleteClicked += Item_DeleteClicked;
                                 flowLayoutPanel1.Controls.Add(item);
                             }
 
@@ -98,6 +92,29 @@ namespace CoffeeHouseABC.User_Control
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi khi tải lịch sử mua hàng: " + ex.Message);
+            }
+        }
+
+        private void Item_DeleteClicked(object? sender, int maHD)
+        {
+            try
+            {
+                DatabaseService db = new DatabaseService();
+                bool success = db.XoaDonHang(maHD);
+
+                if (success)
+                {
+                    MessageBox.Show("Xóa đơn hàng thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadPurchaseHistory();
+                }
+                else
+                {
+                    MessageBox.Show("Không thể xóa đơn hàng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi xóa đơn hàng: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

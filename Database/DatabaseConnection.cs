@@ -28,9 +28,6 @@ namespace CoffeeHouseABC.Database
     }
     public class DatabaseService
     {
-        // ======================================
-        // LẤY DANH SÁCH SẢN PHẨM
-        // ======================================
         public List<SanPham> GetSanPham()
         {
             List<SanPham> list = new List<SanPham>();
@@ -59,15 +56,11 @@ namespace CoffeeHouseABC.Database
             return list;
         }
 
-        // ======================================
-        // ĐĂNG KÝ
-        // ======================================
         public bool Register(string username, string password)
         {
             using SqlConnection conn = DatabaseConnection.GetConnection();
             conn.Open();
 
-            // kiểm tra trùng username
             string checkQuery = "SELECT COUNT(*) FROM KHACHHANG WHERE TenTaiKhoan = @User";
             using SqlCommand checkCmd = new SqlCommand(checkQuery, conn);
             checkCmd.Parameters.AddWithValue("@User", username);
@@ -76,7 +69,6 @@ namespace CoffeeHouseABC.Database
             if (count > 0)
                 return false;
 
-            // đăng ký
             string insertQuery = @"INSERT INTO KHACHHANG (TenTaiKhoan, MatKhau, VaiTro)
                                VALUES (@User, @Pass, 'User')";
 
@@ -102,9 +94,6 @@ namespace CoffeeHouseABC.Database
         }
 
 
-        // ======================================
-        // ĐĂNG NHẬP
-        // ======================================
         public KhachHang Login(string username, string password)
         {
             using SqlConnection conn = DatabaseConnection.GetConnection();
@@ -176,7 +165,6 @@ namespace CoffeeHouseABC.Database
 
                 try
                 {
-                    // 1️⃣ Thêm đơn hàng
                     string sqlHD = @"INSERT INTO DONHANG (MaKH, TongTien, TrangThai, NgayLap)
                              OUTPUT INSERTED.MaHD
                              VALUES (@maKH, @tongTien, @trangThai, GETDATE())";
@@ -188,7 +176,6 @@ namespace CoffeeHouseABC.Database
 
                     int maHD = (int)cmdHD.ExecuteScalar();
 
-                    // 2️⃣ Thêm chi tiết đơn hàng
                     foreach (var ct in chiTietList)
                     {
                         string sqlCT = @"INSERT INTO CHITIETDONHANG (MaHD, MaSP, SoLuong, DonGiaBan)
@@ -212,7 +199,34 @@ namespace CoffeeHouseABC.Database
             }
         }
 
+        public bool XoaDonHang(int maHD)
+        {
+            using (SqlConnection conn = DatabaseConnection.GetConnection())
+            {
+                conn.Open();
+                SqlTransaction tran = conn.BeginTransaction();
 
+                try
+                {
+                    string sqlCT = "DELETE FROM CHITIETDONHANG WHERE MaHD = @maHD";
+                    using SqlCommand cmdCT = new SqlCommand(sqlCT, conn, tran);
+                    cmdCT.Parameters.AddWithValue("@maHD", maHD);
+                    cmdCT.ExecuteNonQuery();
+
+                    string sqlHD = "DELETE FROM DONHANG WHERE MaHD = @maHD";
+                    using SqlCommand cmdHD = new SqlCommand(sqlHD, conn, tran);
+                    cmdHD.Parameters.AddWithValue("@maHD", maHD);
+                    int result = cmdHD.ExecuteNonQuery();
+
+                    tran.Commit();
+                    return result > 0;
+                }
+                catch (Exception)
+                {
+                    tran.Rollback();
+                    throw;
+                }
+            }
+        }
     }
-
 }

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            Guna.UI2.WinForms.Guna2Elipse guna2Elipse1;
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
@@ -48,8 +47,8 @@
             // 
             // guna2Panel1
             // 
-            guna2Panel1.Controls.Add(guna2HtmlLabel2);
             guna2Panel1.Controls.Add(guna2HtmlLabel1);
+            guna2Panel1.Controls.Add(guna2HtmlLabel2);
             guna2Panel1.Controls.Add(guna2HtmlLabel3);
             guna2Panel1.Controls.Add(guna2HtmlLabel4);
             guna2Panel1.CustomizableEdges = customizableEdges1;
@@ -57,64 +56,67 @@
             guna2Panel1.Location = new Point(0, 0);
             guna2Panel1.Name = "guna2Panel1";
             guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2Panel1.Size = new Size(1580, 65);
+            guna2Panel1.Size = new Size(1580, 56);
             guna2Panel1.TabIndex = 0;
-            // 
-            // guna2HtmlLabel4
-            // 
-            guna2HtmlLabel4.AutoSize = false;
-            guna2HtmlLabel4.BackColor = Color.Transparent;
-            guna2HtmlLabel4.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            guna2HtmlLabel4.Location = new Point(933, 3);
-            guna2HtmlLabel4.Name = "guna2HtmlLabel4";
-            guna2HtmlLabel4.Size = new Size(304, 47);
-            guna2HtmlLabel4.TabIndex = 3;
-            guna2HtmlLabel4.Text = "Tình trạng";
-            guna2HtmlLabel4.TextAlignment = ContentAlignment.MiddleCenter;
-            // 
-            // guna2HtmlLabel3
-            // 
-            guna2HtmlLabel3.AutoSize = false;
-            guna2HtmlLabel3.BackColor = Color.Transparent;
-            guna2HtmlLabel3.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            guna2HtmlLabel3.Location = new Point(623, 3);
-            guna2HtmlLabel3.Name = "guna2HtmlLabel3";
-            guna2HtmlLabel3.Size = new Size(304, 47);
-            guna2HtmlLabel3.TabIndex = 2;
-            guna2HtmlLabel3.Text = "Giá trị đơn hàng";
-            guna2HtmlLabel3.TextAlignment = ContentAlignment.MiddleCenter;
-            // 
-            // guna2HtmlLabel2
-            // 
-            guna2HtmlLabel2.AutoSize = false;
-            guna2HtmlLabel2.BackColor = Color.Transparent;
-            guna2HtmlLabel2.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            guna2HtmlLabel2.Location = new Point(313, 3);
-            guna2HtmlLabel2.Name = "guna2HtmlLabel2";
-            guna2HtmlLabel2.Size = new Size(304, 47);
-            guna2HtmlLabel2.TabIndex = 1;
-            guna2HtmlLabel2.Text = "Ngày mua";
-            guna2HtmlLabel2.TextAlignment = ContentAlignment.MiddleCenter;
+            guna2Panel1.BackColor = Color.White;
             // 
             // guna2HtmlLabel1
             // 
             guna2HtmlLabel1.AutoSize = false;
             guna2HtmlLabel1.BackColor = Color.Transparent;
             guna2HtmlLabel1.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            guna2HtmlLabel1.Location = new Point(3, 3);
+            guna2HtmlLabel1.Location = new Point(3, 5);
             guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            guna2HtmlLabel1.Size = new Size(304, 47);
+            guna2HtmlLabel1.Size = new Size(250, 47);
             guna2HtmlLabel1.TabIndex = 0;
             guna2HtmlLabel1.Text = "Mã hóa đơn";
             guna2HtmlLabel1.TextAlignment = ContentAlignment.MiddleCenter;
             // 
+            // guna2HtmlLabel2
+            // 
+            guna2HtmlLabel2.AutoSize = false;
+            guna2HtmlLabel2.BackColor = Color.Transparent;
+            guna2HtmlLabel2.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            guna2HtmlLabel2.Location = new Point(259, 5);
+            guna2HtmlLabel2.Name = "guna2HtmlLabel2";
+            guna2HtmlLabel2.Size = new Size(250, 47);
+            guna2HtmlLabel2.TabIndex = 1;
+            guna2HtmlLabel2.Text = "Ngày mua";
+            guna2HtmlLabel2.TextAlignment = ContentAlignment.MiddleCenter;
+            // 
+            // guna2HtmlLabel3
+            // 
+            guna2HtmlLabel3.AutoSize = false;
+            guna2HtmlLabel3.BackColor = Color.Transparent;
+            guna2HtmlLabel3.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            guna2HtmlLabel3.Location = new Point(515, 5);
+            guna2HtmlLabel3.Name = "guna2HtmlLabel3";
+            guna2HtmlLabel3.Size = new Size(250, 47);
+            guna2HtmlLabel3.TabIndex = 2;
+            guna2HtmlLabel3.Text = "Giá trị đơn hàng";
+            guna2HtmlLabel3.TextAlignment = ContentAlignment.MiddleCenter;
+            // 
+            // guna2HtmlLabel4
+            // 
+            guna2HtmlLabel4.AutoSize = false;
+            guna2HtmlLabel4.BackColor = Color.Transparent;
+            guna2HtmlLabel4.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            guna2HtmlLabel4.Location = new Point(771, 5);
+            guna2HtmlLabel4.Name = "guna2HtmlLabel4";
+            guna2HtmlLabel4.Size = new Size(250, 47);
+            guna2HtmlLabel4.TabIndex = 3;
+            guna2HtmlLabel4.Text = "Tình trạng";
+            guna2HtmlLabel4.TextAlignment = ContentAlignment.MiddleCenter;
+            // 
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.AutoScroll = true;
+            flowLayoutPanel1.Dock = DockStyle.Fill;
             flowLayoutPanel1.Location = new Point(0, 56);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(1580, 745);
+            flowLayoutPanel1.Size = new Size(1580, 698);
             flowLayoutPanel1.TabIndex = 1;
+            flowLayoutPanel1.BackColor = Color.White;
             // 
             // UC_PurchaseHistory
             // 
@@ -138,5 +140,6 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
         private FlowLayoutPanel flowLayoutPanel1;
+        private Guna.UI2.WinForms.Guna2Elipse guna2Elipse1;
     }
 }
