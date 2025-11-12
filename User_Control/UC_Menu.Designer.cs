@@ -18,6 +18,8 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             flowPanel = new FlowLayoutPanel();
@@ -25,6 +27,7 @@
             guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(components);
             guna2DragControl1 = new Guna.UI2.WinForms.Guna2DragControl(components);
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             guna2Panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -36,7 +39,7 @@
             flowPanel.Margin = new Padding(0);
             flowPanel.Name = "flowPanel";
             flowPanel.Padding = new Padding(50, 15, 50, 15);
-            flowPanel.Size = new Size(1580, 754);
+            flowPanel.Size = new Size(1580, 682);
             flowPanel.TabIndex = 0;
             // 
             // btnDatHang
@@ -46,7 +49,7 @@
             btnDatHang.FlatStyle = FlatStyle.Flat;
             btnDatHang.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             btnDatHang.ForeColor = Color.White;
-            btnDatHang.Location = new Point(1279, 0);
+            btnDatHang.Location = new Point(1159, 0);
             btnDatHang.Margin = new Padding(0);
             btnDatHang.Name = "btnDatHang";
             btnDatHang.Size = new Size(301, 72);
@@ -69,17 +72,27 @@
             // guna2Panel1
             // 
             guna2Panel1.Controls.Add(btnDatHang);
-            guna2Panel1.CustomizableEdges = customizableEdges1;
+            guna2Panel1.Controls.Add(guna2Panel2);
+            guna2Panel1.CustomizableEdges = customizableEdges3;
             guna2Panel1.Dock = DockStyle.Bottom;
             guna2Panel1.Location = new Point(0, 682);
             guna2Panel1.Name = "guna2Panel1";
-            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges4;
             guna2Panel1.Size = new Size(1580, 72);
             guna2Panel1.TabIndex = 0;
             // 
+            // guna2Panel2
+            // 
+            guna2Panel2.CustomizableEdges = customizableEdges1;
+            guna2Panel2.Dock = DockStyle.Right;
+            guna2Panel2.Location = new Point(1460, 0);
+            guna2Panel2.Name = "guna2Panel2";
+            guna2Panel2.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            guna2Panel2.Size = new Size(120, 72);
+            guna2Panel2.TabIndex = 2;
+            // 
             // UC_Menu
             // 
-            
             Controls.Add(flowPanel);
             Controls.Add(guna2Panel1);
             Name = "UC_Menu";
@@ -90,5 +103,6 @@
         private Guna.UI2.WinForms.Guna2Elipse guna2Elipse1;
         private Guna.UI2.WinForms.Guna2DragControl guna2DragControl1;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
     }
 }

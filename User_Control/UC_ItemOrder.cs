@@ -32,5 +32,16 @@ namespace CoffeeHouseABC.User_Control
             }
 
         }
+
+        private void guna2NumericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            _ct.SoLuong = (int)guna2NumericUpDown1.Value;
+        }
+
+        private void guna2Button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

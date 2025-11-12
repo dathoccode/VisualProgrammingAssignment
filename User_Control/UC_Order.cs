@@ -92,7 +92,7 @@ namespace CoffeeHouseABC.User_Control
 
                 decimal tongTien = _ds.Sum(x => x.DonGiaBan * x.SoLuong);
 
-                int maHD = db.TaoDonHang(maKH, tongTien, "Chưa thanh toán", _ds);
+                int maHD = db.TaoDonHang(maKH, tongTien, "Đã Thanh Toán", _ds);
 
                 MessageBox.Show($"Đặt hàng thành công! Mã đơn hàng: {maHD}");
 
