@@ -47,11 +47,7 @@ namespace CoffeeHouseABC.User_Control
                 {
                     conn.Open();
 
-                    string sql = @"
-                        SELECT MaHD, NgayLap, TongTien, TrangThai 
-                        FROM DONHANG
-                        WHERE MaKH = 2
-                        ORDER BY NgayLap DESC";
+                    string sql = $"SELECT MaHD, NgayLap, TongTien, TrangThai FROM DONHANG WHERE MaKH = {maKH} ORDER BY NgayLap DESC";
 
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {
