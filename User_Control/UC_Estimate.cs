@@ -1,60 +1,88 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Drawing;
 
 using CoffeeHouseABC.Utils;
-using CoffeeHouseABC.Database;   // thêm thư viện DatabaseService
+using CoffeeHouseABC.Database; 
 
 namespace CoffeeHouseABC.User_Control
 {
     public partial class UC_Estimate : UserControl
     {
+        private Panel? panelThaiDo;
+        private Panel? panelChatLuong;
+        private Panel? panelKhongGian;
+        private Panel? panelDoDaDang;
+
         public UC_Estimate()
         {
             InitializeComponent();
+            CreateGroupPanels();
             SetupRadioButtonGroups();
+        }
+
+        private void CreateGroupPanels()
+        {
+            panelThaiDo = CreateInvisiblePanel("panelThaiDo", 880, 140, 350, 50);
+            panelChatLuong = CreateInvisiblePanel("panelChatLuong", 880, 215, 350, 50);
+            panelKhongGian = CreateInvisiblePanel("panelKhongGian", 880, 290, 350, 50);
+            panelDoDaDang = CreateInvisiblePanel("panelDoDaDang", 880, 365, 350, 50);
+
+            this.Controls.Add(panelThaiDo);
+            this.Controls.Add(panelChatLuong);
+            this.Controls.Add(panelKhongGian);
+            this.Controls.Add(panelDoDaDang);
+
+            MoveToPanel(panelThaiDo, rbThaiDo1, rbThaiDo2, rbThaiDo3, rbThaiDo4, rbThaiDo5, 
+                        lbl1, lbl2, lbl3, lbl4, lbl5);
+            MoveToPanel(panelChatLuong, rbChatLuong1, rbChatLuong2, rbChatLuong3, rbChatLuong4, rbChatLuong5,
+                        lblCL1, lblCL2, lblCL3, lblCL4, lblCL5);
+            MoveToPanel(panelKhongGian, rbKhongGian1, rbKhongGian2, rbKhongGian3, rbKhongGian4, rbKhongGian5,
+                        lblKG1, lblKG2, lblKG3, lblKG4, lblKG5);
+            MoveToPanel(panelDoDaDang, rbDoDaDang1, rbDoDaDang2, rbDoDaDang3, rbDoDaDang4, rbDoDaDang5,
+                        lblDD1, lblDD2, lblDD3, lblDD4, lblDD5);
+
+            panelThaiDo.BringToFront();
+            panelChatLuong.BringToFront();
+            panelKhongGian.BringToFront();
+            panelDoDaDang.BringToFront();
+        }
+
+        private Panel CreateInvisiblePanel(string name, int x, int y, int width, int height)
+        {
+            return new Panel
+            {
+                Name = name,
+                Location = new Point(x, y),
+                Size = new Size(width, height),
+                BackColor = Color.Transparent
+            };
+        }
+
+        private void MoveToPanel(Panel panel, params Control[] controls)
+        {
+            foreach (var ctrl in controls)
+            {
+                Point oldLocation = ctrl.Location;
+                this.Controls.Remove(ctrl);
+                ctrl.Location = new Point(oldLocation.X - panel.Location.X, oldLocation.Y - panel.Location.Y);
+                panel.Controls.Add(ctrl);
+            }
         }
 
         private void SetupRadioButtonGroups()
         {
-            // Nhóm Thái Độ
-            rbThaiDo1.CheckedChanged += (s, e) => { if (rbThaiDo1.Checked) UncheckOthers("ThaiDo", rbThaiDo1); };
-            rbThaiDo2.CheckedChanged += (s, e) => { if (rbThaiDo2.Checked) UncheckOthers("ThaiDo", rbThaiDo2); };
-            rbThaiDo3.CheckedChanged += (s, e) => { if (rbThaiDo3.Checked) UncheckOthers("ThaiDo", rbThaiDo3); };
-            rbThaiDo4.CheckedChanged += (s, e) => { if (rbThaiDo4.Checked) UncheckOthers("ThaiDo", rbThaiDo4); };
-            rbThaiDo5.CheckedChanged += (s, e) => { if (rbThaiDo5.Checked) UncheckOthers("ThaiDo", rbThaiDo5); };
-
-            // Nhóm Chất Lượng
-            rbChatLuong1.CheckedChanged += (s, e) => { if (rbChatLuong1.Checked) UncheckOthers("ChatLuong", rbChatLuong1); };
-            rbChatLuong2.CheckedChanged += (s, e) => { if (rbChatLuong2.Checked) UncheckOthers("ChatLuong", rbChatLuong2); };
-            rbChatLuong3.CheckedChanged += (s, e) => { if (rbChatLuong3.Checked) UncheckOthers("ChatLuong", rbChatLuong3); };
-            rbChatLuong4.CheckedChanged += (s, e) => { if (rbChatLuong4.Checked) UncheckOthers("ChatLuong", rbChatLuong4); };
-            rbChatLuong5.CheckedChanged += (s, e) => { if (rbChatLuong5.Checked) UncheckOthers("ChatLuong", rbChatLuong5); };
-
-            // Nhóm Không Gian
-            rbKhongGian1.CheckedChanged += (s, e) => { if (rbKhongGian1.Checked) UncheckOthers("KhongGian", rbKhongGian1); };
-            rbKhongGian2.CheckedChanged += (s, e) => { if (rbKhongGian2.Checked) UncheckOthers("KhongGian", rbKhongGian2); };
-            rbKhongGian3.CheckedChanged += (s, e) => { if (rbKhongGian3.Checked) UncheckOthers("KhongGian", rbKhongGian3); };
-            rbKhongGian4.CheckedChanged += (s, e) => { if (rbKhongGian4.Checked) UncheckOthers("KhongGian", rbKhongGian4); };
-            rbKhongGian5.CheckedChanged += (s, e) => { if (rbKhongGian5.Checked) UncheckOthers("KhongGian", rbKhongGian5); };
-
-            // Nhóm Độ Đa Dạng
-            rbDoDaDang1.CheckedChanged += (s, e) => { if (rbDoDaDang1.Checked) UncheckOthers("DoDaDang", rbDoDaDang1); };
-            rbDoDaDang2.CheckedChanged += (s, e) => { if (rbDoDaDang2.Checked) UncheckOthers("DoDaDang", rbDoDaDang2); };
-            rbDoDaDang3.CheckedChanged += (s, e) => { if (rbDoDaDang3.Checked) UncheckOthers("DoDaDang", rbDoDaDang3); };
-            rbDoDaDang4.CheckedChanged += (s, e) => { if (rbDoDaDang4.Checked) UncheckOthers("DoDaDang", rbDoDaDang4); };
-            rbDoDaDang5.CheckedChanged += (s, e) => { if (rbDoDaDang5.Checked) UncheckOthers("DoDaDang", rbDoDaDang5); };
+            SetTag("ThaiDo", rbThaiDo1, rbThaiDo2, rbThaiDo3, rbThaiDo4, rbThaiDo5);
+            SetTag("ChatLuong", rbChatLuong1, rbChatLuong2, rbChatLuong3, rbChatLuong4, rbChatLuong5);
+            SetTag("KhongGian", rbKhongGian1, rbKhongGian2, rbKhongGian3, rbKhongGian4, rbKhongGian5);
+            SetTag("DoDaDang", rbDoDaDang1, rbDoDaDang2, rbDoDaDang3, rbDoDaDang4, rbDoDaDang5);
         }
 
-        private void UncheckOthers(string groupTag, Guna.UI2.WinForms.Guna2CustomRadioButton selected)
+        private void SetTag(string tag, params Guna.UI2.WinForms.Guna2CustomRadioButton[] buttons)
         {
-            foreach (Control ctrl in this.Controls)
+            foreach (var rb in buttons)
             {
-                if (ctrl is Guna.UI2.WinForms.Guna2CustomRadioButton rb && 
-                    rb.Tag?.ToString() == groupTag && 
-                    rb != selected)
-                {
-                    rb.Checked = false;
-                }
+                rb.Tag = tag;
             }
         }
 
