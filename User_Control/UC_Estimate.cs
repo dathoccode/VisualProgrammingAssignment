@@ -1,16 +1,89 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Drawing;
 
 using CoffeeHouseABC.Utils;
-using CoffeeHouseABC.Database;   // thêm thư viện DatabaseService
+using CoffeeHouseABC.Database; 
 
 namespace CoffeeHouseABC.User_Control
 {
     public partial class UC_Estimate : UserControl
     {
+        private Panel? panelThaiDo;
+        private Panel? panelChatLuong;
+        private Panel? panelKhongGian;
+        private Panel? panelDoDaDang;
+
         public UC_Estimate()
         {
             InitializeComponent();
+            CreateGroupPanels();
+            SetupRadioButtonGroups();
+        }
+
+        private void CreateGroupPanels()
+        {
+            panelThaiDo = CreateInvisiblePanel("panelThaiDo", 880, 140, 350, 50);
+            panelChatLuong = CreateInvisiblePanel("panelChatLuong", 880, 215, 350, 50);
+            panelKhongGian = CreateInvisiblePanel("panelKhongGian", 880, 290, 350, 50);
+            panelDoDaDang = CreateInvisiblePanel("panelDoDaDang", 880, 365, 350, 50);
+
+            this.Controls.Add(panelThaiDo);
+            this.Controls.Add(panelChatLuong);
+            this.Controls.Add(panelKhongGian);
+            this.Controls.Add(panelDoDaDang);
+
+            MoveToPanel(panelThaiDo, rbThaiDo1, rbThaiDo2, rbThaiDo3, rbThaiDo4, rbThaiDo5, 
+                        lbl1, lbl2, lbl3, lbl4, lbl5);
+            MoveToPanel(panelChatLuong, rbChatLuong1, rbChatLuong2, rbChatLuong3, rbChatLuong4, rbChatLuong5,
+                        lblCL1, lblCL2, lblCL3, lblCL4, lblCL5);
+            MoveToPanel(panelKhongGian, rbKhongGian1, rbKhongGian2, rbKhongGian3, rbKhongGian4, rbKhongGian5,
+                        lblKG1, lblKG2, lblKG3, lblKG4, lblKG5);
+            MoveToPanel(panelDoDaDang, rbDoDaDang1, rbDoDaDang2, rbDoDaDang3, rbDoDaDang4, rbDoDaDang5,
+                        lblDD1, lblDD2, lblDD3, lblDD4, lblDD5);
+
+            panelThaiDo.BringToFront();
+            panelChatLuong.BringToFront();
+            panelKhongGian.BringToFront();
+            panelDoDaDang.BringToFront();
+        }
+
+        private Panel CreateInvisiblePanel(string name, int x, int y, int width, int height)
+        {
+            return new Panel
+            {
+                Name = name,
+                Location = new Point(x, y),
+                Size = new Size(width, height),
+                BackColor = Color.Transparent
+            };
+        }
+
+        private void MoveToPanel(Panel panel, params Control[] controls)
+        {
+            foreach (var ctrl in controls)
+            {
+                Point oldLocation = ctrl.Location;
+                this.Controls.Remove(ctrl);
+                ctrl.Location = new Point(oldLocation.X - panel.Location.X, oldLocation.Y - panel.Location.Y);
+                panel.Controls.Add(ctrl);
+            }
+        }
+
+        private void SetupRadioButtonGroups()
+        {
+            SetTag("ThaiDo", rbThaiDo1, rbThaiDo2, rbThaiDo3, rbThaiDo4, rbThaiDo5);
+            SetTag("ChatLuong", rbChatLuong1, rbChatLuong2, rbChatLuong3, rbChatLuong4, rbChatLuong5);
+            SetTag("KhongGian", rbKhongGian1, rbKhongGian2, rbKhongGian3, rbKhongGian4, rbKhongGian5);
+            SetTag("DoDaDang", rbDoDaDang1, rbDoDaDang2, rbDoDaDang3, rbDoDaDang4, rbDoDaDang5);
+        }
+
+        private void SetTag(string tag, params Guna.UI2.WinForms.Guna2CustomRadioButton[] buttons)
+        {
+            foreach (var rb in buttons)
+            {
+                rb.Tag = tag;
+            }
         }
 
         private void btnGui_Click(object sender, EventArgs e)
